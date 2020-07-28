@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon",
+    "test": "(dropdb --if-exists cjswebstoretest && createdb cjswebstoretest) &&  NODE_ENV=test mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,5 +15,11 @@
     "knex": "^0.21.2",
     "morgan": "~1.9.1",
     "pg": "^8.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
   }
 }
