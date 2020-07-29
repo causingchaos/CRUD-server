@@ -4,6 +4,8 @@ CREATE USER justinberry WITH PASSWORD 'password' CREATEDB;
 \du
 \q
 
+\dt list relations
+
 login as new user
 
 CREATE DATABASE nodelogin; 
@@ -50,7 +52,7 @@ npm install --save-dev mocha chai supertest
 
 $mocha --> to run tests
 
-
+====================================  OTHER =========
 You can create a ~/.pgpass file (%APPDATA%\postgresql\pgpass.conf on Windows) with a line in the following format:
 
 hostname:port:database:username:password
@@ -67,11 +69,3 @@ pgpass.conf:
 
 127.0.0.1:5432:*:username:password
 However, I have it stored here:
-
-C:\Users\<user>\AppData\Roaming\postgresql
-For some reason, on a previous iteration of Postgres, the database had generated the pgpass file and stored it there. I was running into the same issue you were having, moved it to that directory and it worked. I'm not sure why though.
-
-Then, all you'll need to do is:
-
-pg_dump -h myip mydb > mylocaldumpfile
-...ensuring that myip and the ip in pgpass.conf are identical. If they are not, it will prompt you for a password.
