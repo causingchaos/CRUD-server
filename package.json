@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon",
-    "test": "(dropdb --if-exists cjswebstoretest && createdb cjswebstoretest) &&  NODE_ENV=test mocha"
+    "test": "(dropdb --if-exists -U justinberry cjswebstoretest && createdb -U justinberry cjswebstoretest) && NODE_ENV=test mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -28,7 +28,6 @@ SELECT * FROM users;
 
 \d users   --> see constraints on table.
 
-
 create some data                                                                                                                                                                                                                                                      c
 nodelogin=> INSERT INTO users (name,email,password)
 nodelogin-> VALUES ('Justin','justin@justin.com','password');
@@ -40,7 +39,12 @@ knex migrate:make create-sticker
 --> create the migration in migrations folder.
 knex seed:make 01_sticker
 
-knex seed:run
+knex migrate:latest     this runs migrations
+knex seed:run           this runs the seeds
+dropdb and remake db perferably? 
+dropdb --if-exists -U justinberry
+createdb -U justinberry
+
 
 \d sticker
 \x expanded display of table rows.
