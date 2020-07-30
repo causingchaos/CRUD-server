@@ -1,5 +1,12 @@
 /* Test data you can use in your app */
 
+const sticker = {
+    "title": "React",
+    "description": "React Logo",
+    "rating": 7,
+    "url": "https://devstickers.com/assets/img/pro/z392.png"
+};
+
 const stickers = [
   {
     id: 1,
@@ -67,5 +74,6 @@ const stickers = [
 ];
 
 module.exports = {
-  stickers
+  stickers,
+  sticker
 };
