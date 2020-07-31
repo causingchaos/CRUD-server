@@ -1,4 +1,5 @@
 const knex = require('./knex.js'); // the connection! (knex.js)
+const { update } = require('./knex.js');
 
 module.exports = {
   getAll() {
@@ -12,5 +13,8 @@ module.exports = {
   create(sticker)  {
     // * in knex will return all columns created + id
     return knex('sticker').insert(sticker, '*');
+  },
+  update(id, sticker) {
+    return knex('sticker').where('id',id).update(sticker);
   }
 }

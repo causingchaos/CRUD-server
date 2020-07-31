@@ -1,3 +1,5 @@
+// STICKERS API SUBROUTES
+
 const express = require('express');
 
 const router = express.Router();
@@ -15,7 +17,9 @@ function validSticker(sticker){
   // trim() --> trim white spaces from both sides
   const hasTitle = typeof sticker.title == "string" && sticker.title.trim() != '';
   const hasURL = typeof sticker.url == 'string' && sticker.url.trim() != '';
-  return hasTitle && hasURL;
+  const hasDescription = typeof sticker.description == 'string' && sticker.description.trim() != '';
+  const hasRating = !isNaN(sticker.rating);
+  return hasTitle && hasURL && hasDescription && hasRating;
 }
 // End of middleware //
 
@@ -43,8 +47,16 @@ router.post('/', (req,res,next) => {
   }
 });
 
-router.put('/:id', (req,res,next) => {
-  
+router.put('/:id', isValidId, (req,res,next) => {
+  if(validSticker(req.body)) {
+    //update sticker
+    queries.update(req.params.id, req.body).then(stickers => {
+      res.json(stickers[0]);
+    });
+  } else {
+    //respond with console.error();
+    next(new Error('Invalid sticker'));
+  }
 });
 
 module.exports = router;
