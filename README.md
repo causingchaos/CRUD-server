@@ -73,3 +73,16 @@ pgpass.conf:
 
 127.0.0.1:5432:*:username:password
 However, I have it stored here:
+
+create heroku for prod
+heroku create 
+
+will create a 2nd git repo
+$heroku create crud-stickerss-api
+
+git remote -v    will see the new git repo for heroku, push to this to send to PROD.
+git push heroku master
+
+
+heroku addons:create heroku-postgresql --app crud-stickerss-api
+heroku pg:psql --app crud-stickerss-api

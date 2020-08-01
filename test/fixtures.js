@@ -1,6 +1,6 @@
 /* Test data you can use in your app */
 
-const sticker = {
+const sticker = {  //will add this as id 10 in test
     "title": "React",
     "description": "React Logo",
     "rating": 7,

@@ -1,0 +1,12 @@
+heroku login # login once
+heroku create [name] # Initializes heroku app and adds remote
+heroku addons:create heroku-postgresql # add a postgres db addon to your heroku app
+heroku logs [--tail] # Shows heroku server terminal
+heroku pg:psql # connect to heroku addon database server
+heroku config # shows heroku env variables
+  - heroku config:set clown=fiesta # set a config to heroku
+git push heroku master # deploy latest code to heroku
+heroku open # open heroku url in a browser
+heroku run knex migrate:latest #run migrations on prod db
+heroku run knex seed:run # run seeds on production db  
+

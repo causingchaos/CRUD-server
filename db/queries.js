@@ -1,5 +1,4 @@
 const knex = require('./knex.js'); // the connection! (knex.js)
-const { update } = require('./knex.js');
 
 module.exports = {
   getAll() {
@@ -15,6 +14,10 @@ module.exports = {
     return knex('sticker').insert(sticker, '*');
   },
   update(id, sticker) {
-    return knex('sticker').where('id',id).update(sticker);
+    //return knex('sticker').where('id', id).update(sticker);
+    return knex('sticker').where('id', id).update(sticker, '*'); // * returns the object
+  },
+  delete(id) {
+    return knex('sticker').where('id',id).del();
   }
 }

@@ -47,9 +47,12 @@ router.post('/', (req,res,next) => {
   }
 });
 
-router.put('/:id', isValidId, (req,res,next) => {
+router.put('/:id', isValidId, (req, res, next) => {
+  //console.log(req.params.id);
+  //console.log(req.body);
   if(validSticker(req.body)) {
     //update sticker
+    
     queries.update(req.params.id, req.body).then(stickers => {
       res.json(stickers[0]);
     });
@@ -57,6 +60,15 @@ router.put('/:id', isValidId, (req,res,next) => {
     //respond with console.error();
     next(new Error('Invalid sticker'));
   }
+});
+
+router.delete('/:id', isValidId, (req,res) => { //might not need next
+  //do something
+  queries.delete(req.params.id).then(() => {
+    res.json({
+      delete: true
+    });
+  });
 });
 
 module.exports = router;

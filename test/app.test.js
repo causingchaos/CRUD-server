@@ -63,7 +63,40 @@ describe('CRUD Stickers', () => {
         fixtures.sticker.id = response.body.id; //temporarily set id for fixtures
         expect(response.body).to.deep.equal(fixtures.sticker);
         done();
-      })
-  })
+      });
+  });
+
+  it('Updates a record', (done) => {
+    fixtures.sticker.rating = 5  // temporarily set rating to 5 on sticker
+    request(app)
+      .put('/api/v1/stickers/10')
+      .send(fixtures.sticker)
+      .set('Accept','application/json') //set header
+      .expect('Content-Type',/json/)
+      .expect(200)
+      .then((response) => {
+        //Note id is not in fixtures
+        expect(response.body).to.be.a('object');
+        expect(response.body).to.deep.equal(fixtures.sticker);
+        done();
+      });
+  });
+
+  it('Deletes a record', (done) => {
+    request(app)
+      .delete('/api/v1/stickers/10')
+      .send(fixtures.sticker)
+      .set('Accept','application/json') //set header
+      .expect('Content-Type',/json/)
+      .expect(200)
+      .then((response) => {
+        //Note id is not in fixtures
+        expect(response.body).to.be.a('object');
+        expect(response.body).to.deep.equal({
+          delete: true
+        });
+        done();
+      });
+  });
 
 });
