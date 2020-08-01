@@ -10,3 +10,6 @@ heroku open # open heroku url in a browser
 heroku run knex migrate:latest #run migrations on prod db
 heroku run knex seed:run # run seeds on production db  
 
+
+
+Finished entire CRUD API
