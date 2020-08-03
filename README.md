@@ -92,3 +92,5 @@ heroku pg:psql
 to add data to production.
 heroku run knex migrate:latest   migrate table
 heroku run knex seed:run   run seeds on table with sample data in stickers.js
+
+Added new User table, including knex migration, and knex seed. Also added new DB queries for users, and routes for users. Also added index route for root route of page which shows homepage (will seperate out into front end API later).
