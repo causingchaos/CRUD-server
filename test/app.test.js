@@ -3,9 +3,7 @@
 
 const knex = require('../db/knex.js');  // DB connection file
 const request = require('supertest');
-
 const expect = require('chai').expect;
-
 const app = require('../app.js');
 
 const fixtures = require('./fixtures.js');

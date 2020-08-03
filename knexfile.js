@@ -21,5 +21,8 @@ module.exports = {
       charset: 'utf8'
     }
   },
-
+  production: {
+    client: 'pg',
+    connection: process.env.DATABASE_URL 
+  }
 };

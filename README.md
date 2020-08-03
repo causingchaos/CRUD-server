@@ -86,3 +86,5 @@ git push heroku master
 
 heroku addons:create heroku-postgresql --app crud-stickerss-api
 heroku pg:psql --app crud-stickerss-api
+
+heroku pg:psql
