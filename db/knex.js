@@ -6,5 +6,6 @@ console.log(process.env.NODE_ENV);
 console.log(config[environment]);
 const knex = require('knex');
 
+
 const connection = knex(environmentConfig);
 module.exports = connection;
