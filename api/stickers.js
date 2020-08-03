@@ -24,15 +24,24 @@ function validSticker(sticker){
 // End of middleware //
 
 router.get('/', (req,res) => {
-  queries.getAll().then(stickers => {
+  //console.log(req.query); //  /api/v1/stickers?title=mocha
+  const { title, description } = req.query;  // destructure title out of query string object
+  queries.getAll({ title, description }).then(stickers => {
     res.json(stickers);
   })
+  // accepts /api/v1/stickers?title=a&description=o
+  // accepts /api/v1/stickers?title=mocha
+  // accepts /api/v1/stickers?description=coding
 })
 
-router.get('/:id', isValidId, (req,res) => {
+router.get('/:id', isValidId, (req,res,next) => {
   queries.getOne(req.params.id).then(sticker => {
-    res.json(sticker);
-  });
+    if(sticker){
+      res.json(sticker);
+    } else {
+      next();
+    }
+  })
 });
 
 router.post('/', (req,res,next) => {

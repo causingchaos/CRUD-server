@@ -88,3 +88,7 @@ heroku addons:create heroku-postgresql --app crud-stickerss-api
 heroku pg:psql --app crud-stickerss-api
 
 heroku pg:psql
+
+to add data to production.
+heroku run knex migrate:latest   migrate table
+heroku run knex seed:run   run seeds on table with sample data in stickers.js
