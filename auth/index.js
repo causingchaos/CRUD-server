@@ -70,10 +70,9 @@ router.post('/login', async (req, res, next) => {
             // if the password matched
             if (result){
               const isSecure = req.app.get('env') != 'development'; // F if in dev
-              console.log(isSecure);
+              //console.log(isSecure);
               // setting the 'set-cookie' header
               res.cookie('user_id',user.id, {
-                domain: '.localhost',
                 httpOnly: true, 
                 secure:  isSecure, // only true in production
                 signed: true, // encrypt the cookie
