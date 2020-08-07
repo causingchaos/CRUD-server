@@ -24,7 +24,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:8080'
+}));
 
 app.use('/auth', auth);
 // top level route for root of site

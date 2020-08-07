@@ -73,12 +73,12 @@ router.post('/login', async (req, res, next) => {
               console.log(isSecure);
               // setting the 'set-cookie' header
               res.cookie('user_id',user.id, {
-                domain: '.localhost',
                 httpOnly: true, 
                 secure:  isSecure, // only true in production
                 signed: true, // encrypt the cookie
               });
               res.json({
+                id: user.id,
                 message: 'Logging in!'
               });
             } else {
