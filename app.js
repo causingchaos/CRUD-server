@@ -12,6 +12,9 @@ var user = require('./routes/user.js');
 const stickers = require('./api/stickers.js');  // import express router - route
 var auth = require('./auth/index.js');
 
+var authMiddleware = require("./auth/middleware.js");
+const { response } = require('express');
+
 var app = express();
 
 //view engine setup
@@ -33,7 +36,7 @@ app.use('/auth', auth);
 // top level route for root of site
 app.use('/',index);
 // top level route for /users
-app.use('/user', user);
+app.use('/user', authMiddleware.ensureLoggedIn, user);
 // top level route for stickers API, see /api/stickers for subroutes
 app.use('/api/v1/stickers', stickers);
 
@@ -45,7 +48,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // render the error page
-  res.status(err.status || 500);
+  res.status(err.status || res.statusCode || 500);
 
   //prevent error message in prod 
   res.json({
