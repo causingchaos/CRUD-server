@@ -40,6 +40,18 @@ app.use('/user', authMiddleware.ensureLoggedIn, user);
 // top level route for stickers API, see /api/stickers for subroutes
 app.use('/api/v1/stickers', stickers);
 
+app.get('/set', (req,res) => {
+  let key = 'token';
+  let value = [...new Array(30)]
+    .map((item) => ((Math.random() * 36) | 0).toString(36))
+    .join('');
+  
+  console.log('Token',value);
+  let thirtyDays = 1000 * 60 * 60 * 24 * 30; //30 days of miliseconds
+  res.cookie(key, value, {maxAge: thirtyDays, path: '/', sameSite: 'Lax'});
+  res.send({message: 'set-cookie header send with maxAge of 30 days'});
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
