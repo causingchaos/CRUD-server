@@ -78,6 +78,7 @@ router.post('/login', async (req, res, next) => {
                 signed: true, // encrypt the cookie
               });
               res.json({
+                id: user.id,
                 message: 'Logging in!'
               });
             } else {
