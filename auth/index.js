@@ -2,7 +2,6 @@ const express = require('express');
 const User = require('../db/user');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const e = require('express');
 
 // Routes are prepended with /auth for these routes
 
@@ -19,15 +18,22 @@ function validUser(user){
                       user.email.trim() != '';
   const validPassword = typeof user.password == 'string' && 
                       user.password.trim() != '' &&
-                      user.password.trim().length > 6;
+                      user.password.trim().length > 6;                 
   return validEmail && validPassword;
 }
 
+function resError(res, statusCode, message) {
+  res.status(statusCode);
+  res.json({message});
+}
+
 router.post('/signup', async (req, res, next) => { //adding next for custom error
+
   if(validUser(req.body)){
     User.getOneByEmail(req.body.email).then( user => {
       // if user not found
       if(!user) {
+        console.log('email is unique')
         //this is a unique email + hashpassword Store hash in your password DB.
         bcrypt.hash(req.body.password, 10, function(err, hash) {
           const user = {
@@ -43,13 +49,11 @@ router.post('/signup', async (req, res, next) => { //adding next for custom erro
           });
         });
       }else{
-        //email in use
-        next(new Error('Email is in use'))
+        resError(res, 500, "Email in use");
       }
     });
   } else {
-    // send error
-    next(new Error('Invalid User'));
+    resError(res, 400, "Invalid user or password");
   }
 });
 
