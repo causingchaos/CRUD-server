@@ -36,7 +36,7 @@ app.use('/auth', auth);
 // top level route for root of site
 app.use('/',index);
 // top level route for /users
-app.use('/user', user);
+app.use('/user', authMiddleware.ensureLoggedIn, user);
 // top level route for stickers API, see /api/stickers for subroutes
 app.use('/api/v1/stickers', stickers);
 
