@@ -1,3 +1,4 @@
+/** Authoirzation middleware */
 function ensureLoggedIn(req, res, next){
   console.log("hitting ensureLoggedIn middleware")
   console.log("signed cookies are");

@@ -34,9 +34,9 @@ app.use(cors({
 
 app.use('/auth', auth);
 // top level route for root of site
-app.use('/',index);
+app.use('/', index);
 // top level route for /users
-app.use('/user', authMiddleware.ensureLoggedIn, user);
+app.use('/user', authMiddleware.ensureLoggedIn, user); //hit auth middleware before user route
 // top level route for stickers API, see /api/stickers for subroutes
 app.use('/api/v1/stickers', stickers);
 
