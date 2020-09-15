@@ -16,6 +16,17 @@ function ensureLoggedIn(req, res, next){
   }
 }
 
+function allowAccess(req, res, next) {
+  console.log("hitting allow access");
+  if (req.signedCookies.user_id == req.params.id) {
+    next();
+  } else {
+    res.status(401);
+    next(new Error('PENIS'));
+  }
+}
+
 module.exports = {
-  ensureLoggedIn
+  ensureLoggedIn,
+  allowAccess,
 };
