@@ -96,7 +96,13 @@ router.post('/login', async (req, res, next) => {
   } else {
     next(new Error("Invalid Login"));
   }
-})
+});
 
+router.get('/logout', (req, res) => {
+  res.clearCookie('user_id');
+  res.json({
+    message: 'logout'
+  })
+})
 
 module.exports = router;
