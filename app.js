@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(cors({
-  origin: 'http://localhost:8080',  // origin web server (client code)
+  origin: process.env.FRONT_END_ORIGIN,  // origin web server (client code)
   credentials: true     // enables Access-Control-Allow-Credentials (cross origin)
 }));
 

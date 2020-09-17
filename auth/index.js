@@ -33,7 +33,7 @@ router.post('/signup', async (req, res, next) => { //adding next for custom erro
     User.getOneByEmail(req.body.email).then( user => {
       // if user not found
       if(!user) {
-        console.log('email is unique')
+        console.log('email is unique');
         //this is a unique email + hashpassword Store hash in your password DB.
         bcrypt.hash(req.body.password, 10, function(err, hash) {
           const user = {
@@ -42,6 +42,7 @@ router.post('/signup', async (req, res, next) => { //adding next for custom erro
             created_at: new Date(),
           }
           User.create(user).then( id => {
+            console.log('trying to create the user')
             setUserIdCookie(req, res, id); // set cookie on response
             res.json({
               id,
