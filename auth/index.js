@@ -42,6 +42,7 @@ router.post('/signup', async (req, res, next) => { //adding next for custom erro
             created_at: new Date(),
           }
           User.create(user).then( id => {
+            setUserIdCookie(req, res, id); // set cookie on response
             res.json({
               id,
               message: "User Created"
@@ -61,6 +62,18 @@ router.post('/signup', async (req, res, next) => { //adding next for custom erro
   Find  the user by email address, hash the password that the user enters,
   Compare that to the hashed password in the DB, then set cookie.
 */
+
+function setUserIdCookie(req, res, id) {
+  const isSecure = req.app.get('env') != 'development'; // F if in dev
+  //console.log(isSecure);
+  // setting the 'set-cookie' header
+  res.cookie('user_id',id, {
+    httpOnly: true, 
+    secure:  isSecure, // only true in production
+    signed: true, // encrypt the cookie
+  });
+}
+
 router.post('/login', async (req, res, next) => {
   if(validUser(req.body)) {
     // check to see if user in DB
@@ -73,14 +86,7 @@ router.post('/login', async (req, res, next) => {
           .then((result) => {
             // if the password matched
             if (result){
-              const isSecure = req.app.get('env') != 'development'; // F if in dev
-              //console.log(isSecure);
-              // setting the 'set-cookie' header
-              res.cookie('user_id',user.id, {
-                httpOnly: true, 
-                secure:  isSecure, // only true in production
-                signed: true, // encrypt the cookie
-              });
+              setUserIdCookie(req, res, user.id); // set cookie on response
               res.json({
                 id: user.id,
                 message: 'Logging in!'
